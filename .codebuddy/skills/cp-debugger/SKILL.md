@@ -1,13 +1,13 @@
 ---
 name: cp-debugger
-description: 算法竞赛题代码调试助手。当用户上传算法竞赛题目图片或文字描述，并检查 main.cpp / input.txt / output.txt 的代码错误时使用。适用于用户需要诊断算法题代码为什么不对、WA/TLE/RE 等问题排查的场景。
+description: 算法竞赛题代码调试助手。当用户上传算法竞赛题目图片或文字描述，并检查 main.cpp / input.txt 的代码错误时使用。适用于用户需要诊断算法题代码为什么不对、WA/TLE/RE 等问题排查的场景。
 ---
 
 # CP Debugger - 算法竞赛题代码调试 Skill
 
 ## 目的
 
-本 skill 帮助诊断算法竞赛题代码错误。用户提供题目（图片或文字）后，分析 `main.cpp`、`input.txt`、`output.txt`，找出代码错误原因。
+本 skill 帮助诊断算法竞赛题代码错误。用户提供题目（图片或文字）后，分析 `main.cpp`、`input.txt`，找出代码错误原因。标准答案以题目截图中的样例输出为准。
 
 ## 使用流程
 
@@ -33,7 +33,6 @@ description: 算法竞赛题代码调试助手。当用户上传算法竞赛题�
 读取当前工作目录下的文件：
 - `main.cpp` - 待检查的代码
 - `input.txt` - 输入数据
-- `output.txt` - 预期输出
 - `CMakeLists.txt` - 构建配置（确认编译方式）
 
 如果文件不存在，提示用户确认文件路径。
@@ -94,17 +93,7 @@ cmd /c "d:\workspace\qt\competitive_programming\build\Release\competitive_progra
 
 **注意：** PowerShell 不支持 `<` 重定向，必须用 `cmd /c` 包裹命令。
 
-**输出比对：**
-
-```powershell
-# 方式一：输出到文件再比对
-cmd /c "d:\workspace\qt\competitive_programming\build\Release\competitive_programming.exe < d:\workspace\qt\competitive_programming\input.txt > my_output.txt"
-fc my_output.txt output.txt
-
-# 方式二：直接用 git diff 看差异
-cmd /c "...\competitive_programming.exe < ...\input.txt > my_output.txt"
-git diff --no-index my_output.txt output.txt
-```
+**输出比对：** 将程序输出与题目截图中的样例输出对比。
 
 #### 编译错误速查
 
@@ -122,7 +111,7 @@ git diff --no-index my_output.txt output.txt
 | 程序崩溃 / 报系统错误 | 进入步骤 4B（RE 诊断） |
 | 程序长时间无输出 | 可能是 TLE，用 Ctrl+C 终止，进入步骤 4C |
 | 有输出但答案不对 | 进入步骤 4D（WA 诊断） |
-| 输出与 `output.txt` 一致 | 代码正确，无需进一步诊断 |
+| 输出与题目样例一致 | 代码正确，无需进一步诊断 |
 
 ### 4. 诊断分析
 
