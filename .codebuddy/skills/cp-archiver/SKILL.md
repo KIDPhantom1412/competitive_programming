@@ -38,6 +38,8 @@ archives/<题目名称>/
 
 > **关于错误代码**：如果之前调用过 cp-debugger，会备份了原始错误代码到 `main.cpp.orig`，此时应读取该文件作为坑点分析的素材。如果 `main.cpp.orig` 不存在（未调用 debugger 或已删除），则坑点/错误代码注明"未记录"。
 
+> **关于调试样例**：如果存在 `input_0N.txt` / `output_0N.txt`（debugger 调试过程中保存的尝试），应参考这些文件挑选有代表性的样例写入 `题解.md` 的「样例」章节（尤其是暴露 bug 的用例）。
+
 **无对话时**：主动向用户询问 `题目名称`、`来源`、`标签`、`一句话题目`、`一句话题解`、`题目描述`。`题解.md` 中根据 `main.cpp` 反推思路，坑点/错误代码注明"未记录"。
 
 题目名称作为目录名时，替换非法字符：`空格→_` `/\:*?"<>|` 删除。
@@ -171,4 +173,5 @@ git push origin master
 
 - 每次归档（首次或追加）都必须 `git push origin master`
 - Push 失败时：先 `git pull --rebase origin master`，再重新 push
+- **归档完成后清理调试文件**：删除根目录下的 `input_0N.txt`、`output_0N.txt`、`main.cpp.orig`（这些是 debugger 产生的中间文件，已提取有用信息到归档中，不再需要）
 - 完成后输出：`✅ 归档完成！📁 archives/<名称>/ 📦 <commit hash 前7位> 已 push`

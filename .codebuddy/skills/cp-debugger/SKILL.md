@@ -1,13 +1,13 @@
 ---
 name: cp-debugger
-description: 算法竞赛题代码调试助手。当用户上传算法竞赛题目图片或文字描述，并检查 main.cpp / input.txt 的代码错误时使用。适用于用户需要诊断算法题代码为什么不对、WA/TLE/RE 等问题排查的场景。
+description: 算法竞赛题代码调试助手。当用户上传算法竞赛题目图片或文字描述，并检查 main.cpp 的代码错误时使用。适用于用户需要诊断算法题代码为什么不对、WA/TLE/RE 等问题排查的场景。
 ---
 
 # CP Debugger - 算法竞赛题代码调试 Skill
 
 ## 目的
 
-本 skill 帮助诊断算法竞赛题代码错误。用户提供题目（图片或文字）后，分析 `main.cpp`、`input.txt`，找出代码错误原因。标准答案以题目截图中的样例输出为准。
+本 skill 帮助诊断算法竞赛题代码错误。用户提供题目（图片或文字）后，分析 `main.cpp`，找出代码错误原因。标准答案以题目截图中的样例输出为准。
 
 ## 使用流程
 
@@ -32,7 +32,6 @@ description: 算法竞赛题代码调试助手。当用户上传算法竞赛题�
 
 读取当前工作目录下的文件：
 - `main.cpp` - 待检查的代码
-- `input.txt` - 输入数据
 - `CMakeLists.txt` - 构建配置（确认编译方式）
 
 如果文件不存在，提示用户确认文件路径。
@@ -82,18 +81,21 @@ cmake --build "d:\workspace\qt\competitive_programming\build" --config Release
 
 #### 第三步：运行与比对
 
+**每次运行都保存输入输出到编号文件**（便于追溯调试过程，归档时参考）：
+
+1. 确定编号 N：当前目录下 `input_*.txt` 数量 + 1，格式为 `01`、`02`、...
+2. 将测试输入写入 `input_0N.txt`
+3. 用文件重定向运行，输出保存到 `output_0N.txt`：
+
 ```powershell
-cmd /c "\"<项目根目录>\build\Release\competitive_programming.exe\" < \"<项目根目录>\input.txt\""
+cmd /c "d:\workspace\qt\competitive_programming\build\Release\competitive_programming.exe < input_0N.txt > output_0N.txt"
 ```
 
-示例：
-```powershell
-cmd /c "d:\workspace\qt\competitive_programming\build\Release\competitive_programming.exe < d:\workspace\qt\competitive_programming\input.txt"
-```
+4. 读取 `output_0N.txt`，与题目截图中的样例输出对比
 
-**注意：** PowerShell 不支持 `<` 重定向，必须用 `cmd /c` 包裹命令。
+**注意：** PowerShell 不支持 `<` `>` 重定向，必须用 `cmd /c` 包裹。
 
-**输出比对：** 将程序输出与题目截图中的样例输出对比。
+每次修改代码后重新编译运行，编号递增。这些文件在归档后会自动清理（见 cp-archiver）。
 
 #### 编译错误速查
 
