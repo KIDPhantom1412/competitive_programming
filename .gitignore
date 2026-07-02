@@ -13,6 +13,7 @@ CMakeLists.txt.user.*
 .codebuddy/telemetry/
 .codebuddy/sessions/
 !.codebuddy/skills/**
+.vscode/
 
 # ===== Compiled binaries =====
 *.exe

@@ -154,3 +154,4 @@ cmd /c "d:\workspace\qt\competitive_programming\build\Release\competitive_progra
 - 不要直接重写整个代码，而是给出精准的修复建议
 - **每次修改代码后，都要重新执行编译（步骤3）→ 运行 → 比对，确认问题是否解决**
 - 编译命令直接用 CMake，不要手写 g++ 命令
+- 不要用bits/stdc++.h头文件
