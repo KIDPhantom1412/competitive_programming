@@ -65,7 +65,7 @@
         {
             "label": "Run with I/O",
             "type": "shell",
-            "command": "if exist \"build\\Debug\\main.exe\" (build\\Debug\\competitive_programming.exe < input.txt > output.txt) else (build\\competitive_programming.exe < input.txt > output.txt)",
+            "command": "if exist \"build\\Debug\\main.exe\" (build\\Debug\\main.exe < input.txt > output.txt) else (build\\main.exe < input.txt > output.txt)",
             "options": {
                 "cwd": "${workspaceFolder}",
                 "shell": {

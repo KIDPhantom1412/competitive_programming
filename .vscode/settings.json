@@ -1,4 +1,6 @@
 {
+    "editor.inlineSuggest.enabled": false,
+    "editor.inlayHints.enabled": "off",
     "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
