@@ -2,7 +2,6 @@
 name: cp-debugger
 description: 算法竞赛题代码调试助手。当用户上传算法竞赛题目图片或文字描述，并检查 main.cpp 的代码错误时使用。适用于用户需要诊断算法题代码为什么不对、WA/TLE/RE 等问题排查的场景。
 ---
-
 # CP Debugger - 算法竞赛题代码调试 Skill
 
 ## 目的
@@ -31,6 +30,7 @@ description: 算法竞赛题代码调试助手。当用户上传算法竞赛题�
 ### 2. 读取代码文件并备份原始代码
 
 读取当前工作目录下的文件：
+
 - `main.cpp` - 待检查的代码
 - `CMakeLists.txt` - 构建配置（确认编译方式）
 
@@ -57,11 +57,6 @@ Copy-Item "main.cpp" "main.cpp.orig" -Force
 cmake -S "<项目根目录>" -B "<项目根目录>/build"
 ```
 
-示例（当前项目）：
-```powershell
-cmake -S "d:\workspace\qt\competitive_programming" -B "d:\workspace\qt\competitive_programming\build"
-```
-
 - 如果已经配置过（build 目录已存在），可跳过此步骤
 - 配置成功后会显示 `-- Configuring done` 和 `-- Generating done`
 
@@ -71,12 +66,7 @@ cmake -S "d:\workspace\qt\competitive_programming" -B "d:\workspace\qt\competiti
 cmake --build "<项目根目录>/build" --config Release
 ```
 
-示例：
-```powershell
-cmake --build "d:\workspace\qt\competitive_programming\build" --config Release
-```
-
-- 编译成功后，可执行文件位于：`build\Release\competitive_programming.exe`
+- 编译成功后，可执行文件位于：`build\Release\main.exe`
 - 如果只改了 `main.cpp`，此步骤增量编译很快
 
 #### 第三步：运行与比对
@@ -88,7 +78,7 @@ cmake --build "d:\workspace\qt\competitive_programming\build" --config Release
 3. 用文件重定向运行，输出保存到 `output_0N.txt`：
 
 ```powershell
-cmd /c "d:\workspace\qt\competitive_programming\build\Release\competitive_programming.exe < input_0N.txt > output_0N.txt"
+cmd /c "<项目根目录>\build\Release\main.exe < input_0N.txt > output_0N.txt"
 ```
 
 4. 读取 `output_0N.txt`，与题目截图中的样例输出对比
@@ -97,23 +87,14 @@ cmd /c "d:\workspace\qt\competitive_programming\build\Release\competitive_progra
 
 每次修改代码后重新编译运行，编号递增。这些文件在归档后会自动清理（见 cp-archiver）。
 
-#### 编译错误速查
-
-| 现象 | 处理方式 |
-|------|---------|
-| `cmake` 不是内部命令 | 提示用户安装 CMake 并加入 PATH |
-| `No CMAKE_CXX_COMPILER could be found` | 提示用户安装 Visual Studio 或 MinGW |
-| 编译警告（warning） | **不要忽略**，逐条检查，往往是潜在 bug |
-| 编译错误（error） | 复制完整错误信息，进入步骤 4A（CE 诊断） |
-
 #### 运行后观察
 
-| 现象 | 下一步 |
-|------|--------|
-| 程序崩溃 / 报系统错误 | 进入步骤 4B（RE 诊断） |
-| 程序长时间无输出 | 可能是 TLE，用 Ctrl+C 终止，进入步骤 4C |
-| 有输出但答案不对 | 进入步骤 4D（WA 诊断） |
-| 输出与题目样例一致 | 代码正确，无需进一步诊断 |
+| 现象                  | 下一步                                  |
+| --------------------- | --------------------------------------- |
+| 程序崩溃 / 报系统错误 | 进入步骤 4B（RE 诊断）                  |
+| 程序长时间无输出      | 可能是 TLE，用 Ctrl+C 终止，进入步骤 4C |
+| 有输出但答案不对      | 进入步骤 4D（WA 诊断）                  |
+| 输出与题目样例一致    | 代码正确，无需进一步诊断                |
 
 ### 4. 诊断分析
 
@@ -147,11 +128,8 @@ cmd /c "d:\workspace\qt\competitive_programming\build\Release\competitive_progra
 
 ## 注意事项
 
-- 如果用户提供了题目图片，先仔细读取图片中的题目内容
-- 如果用户提供了在线评测链接，可以尝试获取题目
-- 如果用户提供了参考题解（网址/截图/文字），将其作为辅助诊断依据，对比参考题解的思路与用户代码，帮助定位错误
+- 不要直接重写整个代码，不要改变代码的风格，而是给出精准的修复建议
 - 诊断时给出具体行号，方便用户定位
-- 不要直接重写整个代码，而是给出精准的修复建议
 - **每次修改代码后，都要重新执行编译（步骤3）→ 运行 → 比对，确认问题是否解决**
 - 编译命令直接用 CMake，不要手写 g++ 命令
 - 不要用bits/stdc++.h头文件
