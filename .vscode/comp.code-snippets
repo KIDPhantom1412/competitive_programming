@@ -1,0 +1,18 @@
+{
+    "Competitive Template": {
+        "prefix": "comp",
+        "body": [
+            "#include <algorithm>",
+            "#include <cstring>",
+            "#include <iostream>",
+            "",
+            "int main() {",
+            "    std::ios::sync_with_stdio(false);",
+            "    std::cin.tie(nullptr);",
+            "",
+            "    return 0;",
+            "}"
+        ],
+        "description": "Competitive programming template"
+    }
+}

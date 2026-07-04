@@ -1,0 +1,82 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "CMake Configure",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-S",
+                "${workspaceFolder}",
+                "-B",
+                "${workspaceFolder}/build",
+                "-DCMAKE_BUILD_TYPE=Debug"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "运行 cmake 配置项目，生成构建文件到 build 目录"
+        },
+        {
+            "label": "CMake Build",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build",
+                "--config",
+                "Debug"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOn": "CMake Configure",
+            "detail": "编译 build 目录下的项目"
+        },
+        {
+            "label": "CMake Clean Build",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build",
+                "--config",
+                "Debug",
+                "--clean-first"
+            ],
+            "group": "build",
+            "dependsOn": "CMake Configure",
+            "detail": "清理后重新编译项目"
+        },
+        {
+            "label": "CMake Clean",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build",
+                "--target",
+                "clean"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "清理构建产物"
+        },
+        {
+            "label": "Run with I/O",
+            "type": "shell",
+            "command": "if exist \"build\\Debug\\main.exe\" (build\\Debug\\competitive_programming.exe < input.txt > output.txt) else (build\\competitive_programming.exe < input.txt > output.txt)",
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "cmd.exe",
+                    "args": ["/c"]
+                }
+            },
+            "group": "build",
+            "dependsOn": "CMake Build",
+            "problemMatcher": [],
+            "detail": "通过 CMake 编译后，从 input.txt 输入，输出到 output.txt"
+        }
+    ]
+}
