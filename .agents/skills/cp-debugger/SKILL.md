@@ -38,8 +38,16 @@ description: 算法竞赛题代码调试助手。当用户上传算法竞赛题�
 
 **备份原始错误代码**（重要！调试过程中会反复修改 `main.cpp`，备份原始版本便于后续对比和归档）：
 
+Windows：
+
 ```powershell
 Copy-Item "main.cpp" "main.cpp.orig" -Force
+```
+
+Linux：
+
+```bash
+cp main.cpp main.cpp.orig
 ```
 
 - 备份文件 `main.cpp.orig` 保存的是用户最初的错误代码
@@ -51,7 +59,9 @@ Copy-Item "main.cpp" "main.cpp.orig" -Force
 
 **本项目使用 CMake 构建，编译步骤如下：**
 
-#### 第一步：CMake 配置（仅首次或 CMakeLists.txt 变更后需要）
+项目支持 Windows 与 Linux 两套构建方式。Linux 下构建目录不要放在项目根目录（避免改动仓库文件），推荐 `/tmp/opencode/build`。
+
+#### Windows 配置（Visual Studio 生成器）
 
 ```powershell
 cmake -S "<项目根目录>" -B "<项目根目录>/build"
@@ -60,7 +70,16 @@ cmake -S "<项目根目录>" -B "<项目根目录>/build"
 - 如果已经配置过（build 目录已存在），可跳过此步骤
 - 配置成功后会显示 `-- Configuring done` 和 `-- Generating done`
 
-#### 第二步：编译
+#### Linux 配置（Ninja + g++）
+
+```bash
+cmake -S "<项目根目录>" -B /tmp/opencode/build -G Ninja -DCMAKE_CXX_COMPILER=g++
+```
+
+- 项目根目录的 `build/` 是旧 Visual Studio 生成文件，在 Linux 下**不要用它**。
+- 配置成功后会显示 `-- Configuring done` 和 `-- Generating done`
+
+#### Windows 编译
 
 ```powershell
 cmake --build "<项目根目录>/build" --config Release
@@ -69,7 +88,16 @@ cmake --build "<项目根目录>/build" --config Release
 - 编译成功后，可执行文件位于：`build\Release\main.exe`
 - 如果只改了 `main.cpp`，此步骤增量编译很快
 
-#### 第三步：运行与比对
+#### Linux 编译
+
+```bash
+cmake --build /tmp/opencode/build
+```
+
+- 编译成功后，可执行文件位于：`/tmp/opencode/build/main`
+- 如果只改了 `main.cpp`，此步骤增量编译很快
+
+#### 运行与比对
 
 **每次运行都保存输入输出到编号文件**（便于追溯调试过程，归档时参考）：
 
@@ -77,13 +105,23 @@ cmake --build "<项目根目录>/build" --config Release
 2. 将测试输入写入 `input_0N.txt`
 3. 用文件重定向运行，输出保存到 `output_0N.txt`：
 
+##### Windows
+
 ```powershell
 cmd /c "<项目根目录>\build\Release\main.exe < input_0N.txt > output_0N.txt"
 ```
 
-4. 读取 `output_0N.txt`，与题目截图中的样例输出对比
-
 **注意：** PowerShell 不支持 `<` `>` 重定向，必须用 `cmd /c` 包裹。
+
+##### Linux
+
+```bash
+/tmp/opencode/build/main < input_0N.txt > output_0N.txt
+```
+
+**注意：** Linux 下直接重定向即可，构建产物在 `/tmp/opencode/build/main`。
+
+4. 读取 `output_0N.txt`，与题目截图中的样例输出对比
 
 每次修改代码后重新编译运行，编号递增。这些文件在归档后会自动清理（见 cp-archiver）。
 
