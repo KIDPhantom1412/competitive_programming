@@ -60,17 +60,17 @@ cp main.cpp main.cpp.orig
 **只能使用 `run.sh`（Linux）或 `run.bat`（Windows）编译运行，不要直接调用 `g++`。** 编译配置在 `.env` 中。
 
 - Windows 默认运行：`run.bat`
-- Windows 指定输入输出：`run.bat input_0N.txt output_0N.txt`
+- Windows 指定输入输出：`run.bat tmp\input_0N.txt tmp\output_0N.txt`
 - Linux 默认运行：`./run.sh`
-- Linux 指定输入输出：`./run.sh input_0N.txt output_0N.txt`
+- Linux 指定输入输出：`./run.sh tmp/input_0N.txt tmp/output_0N.txt`
 
 #### 运行与比对
 
 **每次运行都保存输入输出到编号文件**（便于追溯调试过程，归档时参考）：
 
-1. 确定编号 N：当前目录下 `input_*.txt` 数量 + 1，格式为 `01`、`02`、...
-2. 将测试输入写入 `input_0N.txt`
-3. 调用 `run.sh` 运行，输出保存到 `output_0N.txt`：
+1. 确定编号 N： `tmp/input_*.txt` 数量 + 1，格式为 `01`、`02`、...
+2. 将测试输入写入 `tmp/input_0N.txt`
+3. 调用 `run.sh` 运行，输出保存到 `tmp/output_0N.txt`：
 
 ```bash
 ./run.sh tmp/input_0N.txt tmp/output_0N.txt
@@ -80,7 +80,7 @@ cp main.cpp main.cpp.orig
 run.bat tmp\input_0N.txt tmp\output_0N.txt
 ```
 
-4. 读取 `output_0N.txt`，与题目截图中的样例输出对比
+4. 读取 `tmp/output_0N.txt`，与题目截图中的样例输出对比
 
 每次修改代码后重新编译运行，编号递增。这些文件先不要删除。
 
