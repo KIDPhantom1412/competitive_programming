@@ -1,2 +1,7 @@
 # ===== Build artifacts =====
 build/
+main
+tmp/
+
+# ===== Local configuration =====
+.env

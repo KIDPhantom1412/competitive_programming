@@ -32,7 +32,7 @@ description: 算法竞赛题代码调试助手。当用户上传算法竞赛题�
 读取当前工作目录下的文件：
 
 - `main.cpp` - 待检查的代码
-- `CMakeLists.txt` - 构建配置（确认编译方式）
+- `.env` - 编译配置（确认 `OS`、`CXX`、`CXXFLAGS`）
 
 如果文件不存在，提示用户确认文件路径。
 
@@ -57,45 +57,10 @@ cp main.cpp main.cpp.orig
 
 ### 3. 编译与运行
 
-**本项目使用 CMake 构建，编译步骤如下：**
+**只能使用 `run.sh` 编译运行，不要直接调用 `g++`。** 编译配置在 `.env` 中。
 
-项目支持 Windows 与 Linux 两套构建方式。Linux 下构建目录不要放在项目根目录（避免改动仓库文件），推荐 `/tmp/opencode/build`。
-
-#### Windows 配置（Visual Studio 生成器）
-
-```powershell
-cmake -S "<项目根目录>" -B "<项目根目录>/build"
-```
-
-- 如果已经配置过（build 目录已存在），可跳过此步骤
-- 配置成功后会显示 `-- Configuring done` 和 `-- Generating done`
-
-#### Linux 配置（Ninja + g++）
-
-```bash
-cmake -S "<项目根目录>" -B /tmp/opencode/build -G Ninja -DCMAKE_CXX_COMPILER=g++
-```
-
-- 项目根目录的 `build/` 是旧 Visual Studio 生成文件，在 Linux 下**不要用它**。
-- 配置成功后会显示 `-- Configuring done` 和 `-- Generating done`
-
-#### Windows 编译
-
-```powershell
-cmake --build "<项目根目录>/build" --config Release
-```
-
-- 编译成功后，可执行文件位于：`build\Release\main.exe`
-- 如果只改了 `main.cpp`，此步骤增量编译很快
-
-#### Linux 编译
-
-```bash
-cmake --build /tmp/opencode/build
-```
-
-- 编译成功后，可执行文件位于：`/tmp/opencode/build/main`
-- 如果只改了 `main.cpp`，此步骤增量编译很快
+- 默认运行：`./run.sh`
+- 指定输入输出：`./run.sh input_0N.txt output_0N.txt`
 
 #### 运行与比对
 
@@ -103,23 +68,11 @@ cmake --build /tmp/opencode/build
 
 1. 确定编号 N：当前目录下 `input_*.txt` 数量 + 1，格式为 `01`、`02`、...
 2. 将测试输入写入 `input_0N.txt`
-3. 用文件重定向运行，输出保存到 `output_0N.txt`：
-
-##### Windows
-
-```powershell
-cmd /c "<项目根目录>\build\Release\main.exe < input_0N.txt > output_0N.txt"
-```
-
-**注意：** PowerShell 不支持 `<` `>` 重定向，必须用 `cmd /c` 包裹。
-
-##### Linux
+3. 调用 `run.sh` 运行，输出保存到 `output_0N.txt`：
 
 ```bash
-/tmp/opencode/build/main < input_0N.txt > output_0N.txt
+./run.sh tmp/input_0N.txt tmp/output_0N.txt
 ```
-
-**注意：** Linux 下直接重定向即可，构建产物在 `/tmp/opencode/build/main`。
 
 4. 读取 `output_0N.txt`，与题目截图中的样例输出对比
 
@@ -169,5 +122,5 @@ cmd /c "<项目根目录>\build\Release\main.exe < input_0N.txt > output_0N.txt"
 - 不要直接重写整个代码，不要改变代码的风格，而是给出精准的修复建议
 - 诊断时给出具体行号，方便用户定位
 - **每次修改代码后，都要重新执行编译（步骤3）→ 运行 → 比对，确认问题是否解决**
-- 编译命令直接用 CMake，不要手写 g++ 命令
+- 编译运行统一使用 `run.sh`，配置来自 `.env`
 - 不要用bits/stdc++.h头文件

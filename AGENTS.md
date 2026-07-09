@@ -6,30 +6,26 @@
 - 已 AC 的题目归档到 `archives/<OJ前缀>_<题号>_<题名>/`，每题包含 `题解.md` + `correct_code_01.cpp`（可追加多解法）。
 
 ## 构建
-- 使用 **CMake** + C++23（`CMakeLists.txt:5`），根据所在系统选择生成器：
-  - **Windows**：Visual Studio 生成器，`cmake -S <项目根目录> -B <项目根目录>/build`，产物为 `build\Release\main.exe`。
-  - **Linux**：**Ninja + g++**，产物为 `main`。
 
-### Windows 示例
-
-```powershell
-cmake -S <项目根目录> -B <项目根目录>/build
-cmake --build <项目根目录>/build --config Release
-<项目根目录>\build\Release\main.exe < input.txt > output.txt
-```
+- 统一通过 `run.sh` 脚本编译运行，**不要直接调用 `g++`**；编译选项通过项目根目录的 `.env` 配置：
+  - `CXX`：编译器路径
+  - `CXXFLAGS`：编译 flag，例如 `-std=c++23 -O2 -Wall -Wextra`
+- `run.sh` 自动编译并运行：
+  - 默认：`./run.sh` 等价于 `run.sh` 读取 `.env` 后编译 `main.cpp` 并运行：`tmp/main < input.txt > output.txt`
+  - 带参数：`./run.sh input_01.txt output_01.txt`
+- 编译产物放在 `tmp/main`，不污染项目目录。
 
 ### Linux 示例
 
-- 项目根目录的 `build/` 是旧 Visual Studio 生成文件（`.vcxproj`、`.sln`），在 Linux 下**不要用它**。
-- 为避免改动仓库文件，构建目录放到项目目录外，例如 `/tmp/opencode/build`：
-
 ```bash
-cmake -S <项目根目录> -B /tmp/opencode/build -G Ninja -DCMAKE_CXX_COMPILER=g++
-cmake --build /tmp/opencode/build
-/tmp/opencode/build/main < <项目根目录>/input.txt > <项目根目录>/output.txt
+./run.sh
 ```
 
-- 调试时也可以把测试输入/输出写到 `input_0N.txt` / `output_0N.txt`，但归档后应清理，不要提交。
+### 调试示例
+
+```bash
+./run.sh input_01.txt output_01.txt
+```
 
 ## 代码格式
 - 按 `.clang-format`：LLVM 风格，4 空格缩进，列宽 100，左指针对齐。
