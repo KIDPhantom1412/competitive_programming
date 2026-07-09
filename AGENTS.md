@@ -7,13 +7,15 @@
 
 ## 构建
 
-- 统一通过 `run.sh` 脚本编译运行，**不要直接调用 `g++`**；编译选项通过项目根目录的 `.env` 配置：
+- 统一通过 `run.sh`（Linux）或 `run.bat`（Windows）脚本编译运行，**不要直接调用 `g++`**；编译选项通过项目根目录的 `.env` 配置：
   - `CXX`：编译器路径
   - `CXXFLAGS`：编译 flag，例如 `-std=c++23 -O2 -Wall -Wextra`
-- `run.sh` 自动编译并运行：
-  - 默认：`./run.sh` 等价于 `run.sh` 读取 `.env` 后编译 `main.cpp` 并运行：`tmp/main < input.txt > output.txt`
-  - 带参数：`./run.sh input_01.txt output_01.txt`
-- 编译产物放在 `tmp/main`，不污染项目目录。
+- `run.sh` / `run.bat` 自动编译并运行：
+  - Linux 默认：`./run.sh` 等价于读取 `.env` 后编译 `main.cpp` 并运行：`tmp/main < input.txt > output.txt`
+  - Linux 带参数：`./run.sh input_01.txt output_01.txt`
+  - Windows 默认：`run.bat` 等价于读取 `.env` 后编译 `main.cpp` 并运行：`tmp\main.exe < input.txt > output.txt`
+  - Windows 带参数：`run.bat input_01.txt output_01.txt`
+- 编译产物放在 `tmp/main`（Linux）或 `tmp\main.exe`（Windows），不污染项目目录。
 
 ### Linux 示例
 
@@ -21,10 +23,20 @@
 ./run.sh
 ```
 
+### Windows 示例
+
+```cmd
+run.bat
+```
+
 ### 调试示例
 
 ```bash
 ./run.sh input_01.txt output_01.txt
+```
+
+```cmd
+run.bat input_01.txt output_01.txt
 ```
 
 ## 代码格式

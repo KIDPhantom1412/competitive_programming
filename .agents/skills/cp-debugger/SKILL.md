@@ -57,10 +57,12 @@ cp main.cpp main.cpp.orig
 
 ### 3. 编译与运行
 
-**只能使用 `run.sh` 编译运行，不要直接调用 `g++`。** 编译配置在 `.env` 中。
+**只能使用 `run.sh`（Linux）或 `run.bat`（Windows）编译运行，不要直接调用 `g++`。** 编译配置在 `.env` 中。
 
-- 默认运行：`./run.sh`
-- 指定输入输出：`./run.sh input_0N.txt output_0N.txt`
+- Windows 默认运行：`run.bat`
+- Windows 指定输入输出：`run.bat input_0N.txt output_0N.txt`
+- Linux 默认运行：`./run.sh`
+- Linux 指定输入输出：`./run.sh input_0N.txt output_0N.txt`
 
 #### 运行与比对
 
@@ -72,6 +74,10 @@ cp main.cpp main.cpp.orig
 
 ```bash
 ./run.sh tmp/input_0N.txt tmp/output_0N.txt
+```
+
+```cmd
+run.bat tmp\input_0N.txt tmp\output_0N.txt
 ```
 
 4. 读取 `output_0N.txt`，与题目截图中的样例输出对比
@@ -122,5 +128,5 @@ cp main.cpp main.cpp.orig
 - 不要直接重写整个代码，不要改变代码的风格，而是给出精准的修复建议
 - 诊断时给出具体行号，方便用户定位
 - **每次修改代码后，都要重新执行编译（步骤3）→ 运行 → 比对，确认问题是否解决**
-- 编译运行统一使用 `run.sh`，配置来自 `.env`
+- 编译运行统一使用 `run.sh`（Linux）或 `run.bat`（Windows），配置来自 `.env`
 - 不要用bits/stdc++.h头文件
