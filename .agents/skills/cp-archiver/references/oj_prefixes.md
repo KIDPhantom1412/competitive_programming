@@ -16,6 +16,7 @@
 | UVa | UVa | xxxxx | UVa_10000 |
 | ZOJ | ZOJ | xxxx | ZOJ_1234 |
 | 蓝桥杯 | 蓝桥杯 | xxxxx | 蓝桥杯_12345 |
+| AcWing | AcWing | xxx | AcWing_285_没有上司的舞会 |
 
 ## 注意事项
 
