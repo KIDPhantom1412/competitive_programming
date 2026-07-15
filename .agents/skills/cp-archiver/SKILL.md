@@ -2,17 +2,16 @@
 name: cp-archiver
 description: 算法竞赛题归档助手。触发词："归档"/"存档"/"保存这道题"（首次归档）；"追加解法"/"新解法"（追加到已有归档，不创建新目录）。
 ---
-
 # CP Archiver
 
 将算法题归档到 `archives/<题目名称>/`，每道题一个 `题解.md` + 若干 `correct_code_N.cpp`。
 
 ## 触发条件
 
-| 模式 | 触发词 |
-|------|--------|
-| 首次归档 | "归档"、"存档"、"保存这道题" |
-| 追加解法 | "追加解法"、"新解法"、"第二种解法" |
+| 模式           | 触发词                                             |
+| -------------- | -------------------------------------------------- |
+| 首次归档       | "归档"、"存档"、"保存这道题"                       |
+| 追加解法       | "追加解法"、"新解法"、"第二种解法"                 |
 | 无对话直接归档 | 用户说"归档"但聊天记录中无题目讨论（用户独立完成） |
 
 ## 归档文件结构
@@ -30,9 +29,9 @@ archives/<题目名称>/
 
 先根据 OJ 前缀规范（`references/oj_prefixes.md`）确定目录名，然后搜索是否已归档：
 
-```powershell
+```Shell
 # 按题号搜索（最可靠），例如题号 P1040
-search_file pattern "*P1040*" target_directory "archives"
+search_file pattern "*1040*" target_directory "archives"
 ```
 
 - **未找到** → 首次归档，执行步骤 2~4
@@ -98,12 +97,16 @@ search_file pattern "*P1040*" target_directory "archives"
 
 **输入：**
 ```
+
 （输入内容）
+
 ```
 
 **输出：**
 ```
+
 （输出内容）
+
 ```
 
 **说明：** （一句话说明）
@@ -114,18 +117,23 @@ search_file pattern "*P1040*" target_directory "archives"
 
 **输入：**
 ```
+
 （输入内容）
+
 ```
 
 **输出：**
 ```
+
 （输出内容）
+
 ```
 
 **说明：** （一句话说明）
 ```
 
 **样例格式规则：**
+
 - 标题标注类型：`（基本功能）`、`（边界）`、`（极端数据）`、`（坑点：xxx）`
 - 多个样例用 `---` 分隔
 
@@ -145,7 +153,7 @@ search_file pattern "*P1040*" target_directory "archives"
 确认无误后提交？如需修改请告诉我。
 ```
 
-```powershell
+```Shell
 git add "archives/<题目名称>/"
 git commit -m "feat(archive): <题目名称> - <一句话题解>
 
@@ -162,11 +170,12 @@ git push origin master
 不创建新目录，只追加。
 
 1. 确定编号 N：已有 `correct_code_*.cpp` 数量 + 1
-2. 在 `题解.md` 末尾「样例」之前，追加 `## 解法 N：<算法名称>` 章节（含思路/复杂度/代码/坑点）
-3. 新增 `correct_code_0N.cpp`
-4. 征求用户确认后提交：
+2. 在`## 一句话题解`中换行新增一句话题解。
+3. 在 `题解.md` 末尾「样例」之前，追加 `## 解法 N：<算法名称>` 章节（含思路/复杂度/代码/坑点）
+4. 新增 `correct_code_0N.cpp`
+5. 征求用户确认后提交：
 
-```powershell
+```Shell
 git add "archives/<题目名称>/"
 git commit -m "feat(archive): <题目名称> - 追加解法N：<算法名称>
 
