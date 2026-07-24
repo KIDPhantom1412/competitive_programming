@@ -139,7 +139,7 @@ search_file pattern "*1040*" target_directory "archives"
 
 同时写入 `correct_code_01.cpp`（完整代码，关键行加注释）。
 
-### 4. Git 提交并 Push（首次归档）
+### 4. Git 提交（首次归档）
 
 **先展示归档摘要征求用户确认，用户同意后再执行：**
 
@@ -160,7 +160,6 @@ git commit -m "feat(archive): <题目名称> - <一句话题解>
 - 来源：<来源>
 - 标签：<标签>
 - 状态：AC"
-git push origin master
 ```
 
 未 AC 时状态写 `WIP`。只 `add` `archives/` 目录。
@@ -181,13 +180,10 @@ git commit -m "feat(archive): <题目名称> - 追加解法N：<算法名称>
 
 - 状态：AC
 - 解法：N/<总解法数>"
-git push origin master
 ```
 
 ## 注意事项
 
-- 每次归档（首次或追加）都必须 `git push origin master`
-- Push 失败时：先 `git pull --rebase origin master`，再重新 push
 - **归档完成后清理调试文件**：删除debugger的 `input_0N.txt`、`output_0N.txt`、`main.cpp.orig`（这些是 debugger 产生的中间文件，已提取有用信息到归档中，不再需要）
 - **不要提交 `main.cpp`、`input.txt`、`output.txt`**：这三个文件是占位符，应始终保持为空。归档时只 `add` `archives/` 目录，不要 `add` 根目录下的这三个文件
-- 完成后输出：`✅ 归档完成！📁 archives/<名称>/ 📦 <commit hash 前7位> 已 push`
+- 完成后输出：`✅ 归档完成！📁 archives/<名称>/ 📦 <commit hash 前7位> 已提交`
