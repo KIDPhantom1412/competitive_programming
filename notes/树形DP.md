@@ -163,6 +163,18 @@
 
 * [树上背包：步数限制与返回状态](../archives/OpenJ_Bailian_2486_Apple_Tree/题解.md)
 
+### The more, The Better
+
+> 依赖背包经典题。建立虚拟根节点 0 把多棵依赖树连成一棵树，容量记得 +1（虚拟根占 1 个名额）。
+
+题目：
+
+* [vjudge.net/problem/HDU-1561](https://vjudge.net/problem/HDU-1561)
+
+题解：
+
+* [树形背包 + 依赖背包 + 虚拟根](../archives/HDU_1561_The_more_The_Better/题解.md)
+
 ### Starship Troopers
 
 题目：
