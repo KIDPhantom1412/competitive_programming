@@ -152,3 +152,13 @@
 题解：
 
 * [树上背包：删边得到孤立子树](../archives/OpenJ_Bailian_1947_Rebuilding_Roads/题解.md)
+
+### Apple Tree
+
+题目：
+
+* [vjudge.net/problem/OpenJ_Bailian-2486](https://vjudge.net/problem/OpenJ_Bailian-2486)
+
+题解：
+
+* [树上背包：步数限制与返回状态](../archives/OpenJ_Bailian_2486_Apple_Tree/题解.md)
