@@ -162,3 +162,13 @@
 题解：
 
 * [树上背包：步数限制与返回状态](../archives/OpenJ_Bailian_2486_Apple_Tree/题解.md)
+
+### Starship Troopers
+
+题目：
+
+* [vjudge.net/problem/HDU-1011](https://vjudge.net/problem/HDU-1011)
+
+题解：
+
+* [树形背包：子树至少 1 士兵 + m=0 特判](../archives/HDU_1011_Starship_Troopers/题解.md)
