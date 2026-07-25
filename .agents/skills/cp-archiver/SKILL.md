@@ -186,4 +186,5 @@ git commit -m "feat(archive): <题目名称> - 追加解法N：<算法名称>
 
 - **归档完成后清理调试文件**：删除debugger的 `input_0N.txt`、`output_0N.txt`、`main.cpp.orig`（这些是 debugger 产生的中间文件，已提取有用信息到归档中，不再需要）
 - **不要提交 `main.cpp`、`input.txt`、`output.txt`**：这三个文件是占位符，应始终保持为空。归档时只 `add` `archives/` 目录，不要 `add` 根目录下的这三个文件
+- 由于调试用的文件最终会被删除，因此不应该在题解中提到调试用的文件和占位用的文件。
 - 完成后输出：`✅ 归档完成！📁 archives/<名称>/ 📦 <commit hash 前7位> 已提交`
