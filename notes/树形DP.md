@@ -23,6 +23,16 @@
 
 + [无向树解法](../archives/AcWing_285_没有上司的舞会/题解.md)
 
+#### 骑士
+
+题目：
+
+* [vjudge.net/problem/洛谷-P2607](https://vjudge.net/problem/%E6%B4%9B%E8%B0%B7-P2607)
+
+题解：
+
+* [基环树 + 最大权独立集](../archives/洛谷_P2607_骑士/题解.md)
+
 ### 树上点覆盖集(Vertex Cover on Tree)
 
 > 在树中选出若干节点构成点覆盖集，要求每条边至少有一个端点被选中，目标是最小化（或最大化）某种权值。
