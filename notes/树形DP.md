@@ -151,6 +151,16 @@
 
 * [换根DP求每个节点最远距离](../archives/HDU_2196_Computer/题解.md)
 
+### Nearby Cows G
+
+题目：
+
+* [vjudge.net/problem/洛谷-P3047](https://vjudge.net/problem/%E6%B4%9B%E8%B0%B7-P3047)
+
+题解：
+
+* [换根DP求每个节点距离K以内权和](../archives/洛谷_P3047_Nearby_Cows_G/题解.md)
+
 ## 树形背包DP
 
 > 在有根树上做背包：每个子树可视为一个物品组，从中选择若干节点会获得收益并付出代价，要求在某个限制下的最优值。
@@ -186,6 +196,16 @@
 题解：
 
 * [步数限制与返回状态](../archives/OpenJ_Bailian_2486_Apple_Tree/题解.md)
+
+#### 小 Q 的棋盘
+
+题目：
+
+* [vjudge.net/problem/洛谷-P3698](https://vjudge.net/problem/%E6%B4%9B%E8%B0%B7-P3698)
+
+题解：
+
+* [步数限制 + 返回状态 + 贪心对比](../archives/洛谷_P3698_小Q的棋盘/题解.md)
 
 #### Find Metal Mineral
 
