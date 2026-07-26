@@ -66,6 +66,20 @@
 
 * [最小权支配集](../archives/AcWing_1077_皇宫看守/题解.md)
 
+### 树上最大连通子树和
+
+> 在树中保留一个以某节点为根的连通子树，使得子树中节点权值和最大。每个节点做后序 DP：若子节点的贡献为正，则把该子树合并进来；否则剪断该边。
+
+#### 最大子树和
+
+题目：
+
+* [vjudge.net/problem/洛谷-P1122](https://vjudge.net/problem/%E6%B4%9B%E8%B0%B7-P1122)
+
+题解：
+
+* [后序 DFS，正贡献合并](../archives/洛谷_P1122_最大子树和/题解.md)
+
 ### 树上路径问题
 
 #### 树的最长路径
@@ -147,7 +161,7 @@
 
 题解：
 
-* [树上背包：删边得到孤立子树](../archives/OpenJ_Bailian_1947_Rebuilding_Roads/题解.md)
+* [删边得到孤立子树](../archives/OpenJ_Bailian_1947_Rebuilding_Roads/题解.md)
 
 #### Apple Tree
 
@@ -157,7 +171,7 @@
 
 题解：
 
-* [树上背包：步数限制与返回状态](../archives/OpenJ_Bailian_2486_Apple_Tree/题解.md)
+* [步数限制与返回状态](../archives/OpenJ_Bailian_2486_Apple_Tree/题解.md)
 
 #### Find Metal Mineral
 
@@ -167,7 +181,7 @@
 
 题解：
 
-* [树形背包：机器人覆盖子树](../archives/HDU_4003_Find_Metal_Mineral/题解.md)
+* [机器人覆盖子树](../archives/HDU_4003_Find_Metal_Mineral/题解.md)
 
 ### 可拍平为 DFS 序的树上依赖背包
 
@@ -203,7 +217,7 @@
 
 题解：
 
-* [树形背包：子树至少 1 士兵 + m=0 特判](../archives/HDU_1011_Starship_Troopers/题解.md)
+* [子树至少 1 士兵 + m=0 特判](../archives/HDU_1011_Starship_Troopers/题解.md)
 
 #### 最佳团体
 
