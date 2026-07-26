@@ -184,3 +184,13 @@
 题解：
 
 * [树形背包：子树至少 1 士兵 + m=0 特判](../archives/HDU_1011_Starship_Troopers/题解.md)
+
+### Find Metal Mineral
+
+题目：
+
+* [vjudge.net/problem/HDU-4003](https://vjudge.net/problem/HDU-4003)
+
+题解：
+
+* [树形背包：机器人覆盖子树](../archives/HDU_4003_Find_Metal_Mineral/题解.md)
