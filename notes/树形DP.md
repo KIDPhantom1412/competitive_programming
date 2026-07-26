@@ -228,3 +228,13 @@
 题解：
 
 * [DFS 序 + 0/1 背包 + 分数规划](../archives/洛谷_P4322_最佳团体/题解.md)
+
+#### 选课
+
+题目：
+
+* [vjudge.net/problem/洛谷-P2014](https://vjudge.net/problem/%E6%B4%9B%E8%B0%B7-P2014)
+
+题解：
+
+* [DFS 序 + 0/1 背包 + 虚拟根](../archives/洛谷_P2014_选课/题解.md)
