@@ -125,25 +125,21 @@
 
 ## 树形背包DP
 
-> 在有根树上做分组背包（或依赖背包）：每个子树可视为一个物品组，从中选择若干节点（或保留若干用户）会获得一定收益并付出代价，要求在某个限制下的最优值。
+> 在有根树上做背包：每个子树可视为一个物品组，从中选择若干节点会获得收益并付出代价，要求在某个限制下的最优值。
 >
 > 常用状态：
 >
 > - `f[u][j]`：以 $u$ 为根的子树中，共选择 / 保留 $j$ 个节点（或用户）时的最优值。
 >
-> 转移要点：按后序 DFS 顺序处理每个子树，将每个子树视为一个物品组，枚举在子树中选择的数量，做类似 0/1 背包或分组背包的转移。注意合并顺序和容量上限。
+> 按实现方式可分为两类：
+> 1. 按子树合并：逐个合并子节点的 DP 表，适合“把容量分配给各个子树”的问题。
+> 2. 拍平为 DFS 序：利用后序遍历中子树连续的性质，用一维 DP 做“选择节点 / 跳过子树”的转移。
 
-### 有线电视网
+### 树上依赖背包（按子树合并）
 
-题目：
+> 转移要点：按后序 DFS 顺序处理每个子树，将每个子树视为一个物品组，枚举在子树中选择的数量，做类似依赖背包合并的转移。注意合并顺序和容量上限。
 
-* [www.luogu.com.cn/problem/P1273](https://www.luogu.com.cn/problem/P1273)
-
-题解：
-
-* [后序DFS序树形背包](../archives/洛谷_P1273_有线电视网/题解.md)
-
-### Rebuilding Roads
+#### Rebuilding Roads
 
 题目：
 
@@ -153,7 +149,7 @@
 
 * [树上背包：删边得到孤立子树](../archives/OpenJ_Bailian_1947_Rebuilding_Roads/题解.md)
 
-### Apple Tree
+#### Apple Tree
 
 题目：
 
@@ -163,9 +159,33 @@
 
 * [树上背包：步数限制与返回状态](../archives/OpenJ_Bailian_2486_Apple_Tree/题解.md)
 
-### The more, The Better
+#### Find Metal Mineral
 
-> 依赖背包经典题。建立虚拟根节点 0 把多棵依赖树连成一棵树，容量记得 +1（虚拟根占 1 个名额）。
+题目：
+
+* [vjudge.net/problem/HDU-4003](https://vjudge.net/problem/HDU-4003)
+
+题解：
+
+* [树形背包：机器人覆盖子树](../archives/HDU_4003_Find_Metal_Mineral/题解.md)
+
+### 可拍平为 DFS 序的树上依赖背包
+
+> 当“选择当前节点”等价于“允许进入该子树”，“不选当前节点”等价于“跳过整棵子树”时，可以把后序 DFS 序列拍平成一维区间，用 `f[i][j]` 表示前 i 个节点中选 j 个的最优值。利用子树在 DFS 序中连续、大小为 `size[u]` 的性质，不选 u 时直接跳过 `size[u]` 个位置。拍平后就是一个普通 0/1 背包。
+>
+> 以下题目在结构上都满足该条件（题解中的经典写法可能是按子树合并，但同样可拍平）。
+
+#### 有线电视网
+
+题目：
+
+* [www.luogu.com.cn/problem/P1273](https://www.luogu.com.cn/problem/P1273)
+
+题解：
+
+* [后序DFS序树形背包](../archives/洛谷_P1273_有线电视网/题解.md)
+
+#### The more, The Better
 
 题目：
 
@@ -175,7 +195,7 @@
 
 * [树形背包 + 依赖背包 + 虚拟根](../archives/HDU_1561_The_more_The_Better/题解.md)
 
-### Starship Troopers
+#### Starship Troopers
 
 题目：
 
@@ -185,12 +205,12 @@
 
 * [树形背包：子树至少 1 士兵 + m=0 特判](../archives/HDU_1011_Starship_Troopers/题解.md)
 
-### Find Metal Mineral
+#### 最佳团体
 
 题目：
 
-* [vjudge.net/problem/HDU-4003](https://vjudge.net/problem/HDU-4003)
+* [www.luogu.com.cn/problem/P4322](https://www.luogu.com.cn/problem/P4322)
 
 题解：
 
-* [树形背包：机器人覆盖子树](../archives/HDU_4003_Find_Metal_Mineral/题解.md)
+* [DFS 序 + 0/1 背包 + 分数规划](../archives/洛谷_P4322_最佳团体/题解.md)
