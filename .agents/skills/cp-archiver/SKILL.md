@@ -27,12 +27,7 @@ archives/<题目名称>/
 
 ### 1. 判断模式
 
-先根据 OJ 前缀规范（`references/oj_prefixes.md`）确定目录名，然后搜索是否已归档：
-
-```Shell
-# 按题号搜索（最可靠），例如题号 P1040
-search_file pattern "*1040*" target_directory "archives"
-```
+先根据 OJ 前缀规范（`references/oj_prefixes.md`）确定目录名，再按题号搜索 `archives/` 确认是否已归档（如 Glob `archives/*1040*/**`）：
 
 - **未找到** → 首次归档，执行步骤 2~4
 - **已找到** → 追加模式，跳转步骤 5
@@ -110,32 +105,12 @@ search_file pattern "*1040*" target_directory "archives"
 ```
 
 **说明：** （一句话说明）
-
----
-
-### Sample 2（边界/坑点）
-
-**输入：**
-```
-
-（输入内容）
-
-```
-
-**输出：**
-```
-
-（输出内容）
-
-```
-
-**说明：** （一句话说明）
 ```
 
 **样例格式规则：**
 
 - 标题标注类型：`（基本功能）`、`（边界）`、`（极端数据）`、`（坑点：xxx）`
-- 多个样例用 `---` 分隔
+- 更多样例按同样格式追加，用 `---` 分隔
 
 同时写入 `correct_code_01.cpp`（完整代码，关键行加注释）。
 
@@ -184,7 +159,7 @@ git commit -m "feat(archive): <题目名称> - 追加解法N：<算法名称>
 
 ## 注意事项
 
-- **归档完成后清理调试文件**：删除debugger的 `input_0N.txt`、`output_0N.txt`、`main.cpp.orig`（这些是 debugger 产生的中间文件，已提取有用信息到归档中，不再需要）
+- **归档完成后清理调试文件**：删除debugger的 `input_0N.txt`、`output_0N.txt`、`main.cpp.orig`，以及对拍用的 `tmp/brute.cpp`、`tmp/brute`、`tmp/gen.py`、`tmp/stress_*.txt`（这些是 debugger 产生的中间文件，已提取有用信息到归档中，不再需要）
 - **不要提交 `main.cpp`、`input.txt`、`output.txt`**：这三个文件是占位符，应始终保持为空。归档时只 `add` `archives/` 目录，不要 `add` 根目录下的这三个文件
 - 由于调试用的文件最终会被删除，因此不应该在题解中提到调试用的文件和占位用的文件。
 - 完成后输出：`✅ 归档完成！📁 archives/<名称>/ 📦 <commit hash 前7位> 已提交`
