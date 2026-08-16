@@ -51,16 +51,16 @@ void build(int u, int L, int R) {
     pushup(u);
 }
 
-// 区间 chmin：将 [l,r] 内的元素与 a 取较小值
-void update(int u, int L, int R, int l, int r, LL a) {
-    if (a >= tr[u].mx1) {
-        return;  // a 不小于当前区间最大值，无需修改
+// 区间 chmin：将 [l,r] 内的元素与 d 取较小值
+void chMin(int u, int L, int R, int l, int r, LL d) {
+    if (d >= tr[u].mx1) {
+        return;  // d 不小于当前区间最大值，无需修改
     }
     if (L >= l && R <= r) {
-        if (a > tr[u].mx2) {
-            // 可以直接把最大值降到 a
-            tr[u].sum -= (tr[u].mx1 - a) * tr[u].cnt;
-            tr[u].mx1 = a;
+        if (d > tr[u].mx2) {
+            // 可以直接把最大值降到 d
+            tr[u].sum -= (tr[u].mx1 - d) * tr[u].cnt;
+            tr[u].mx1 = d;
             return;
         }
     }
@@ -68,10 +68,10 @@ void update(int u, int L, int R, int l, int r, LL a) {
     pushdown(u);
     int mid = (L + R) / 2;
     if (l <= mid) {
-        update(u * 2, L, mid, l, r, a);
+        chMin(u * 2, L, mid, l, r, d);
     }
     if (r > mid) {
-        update(u * 2 + 1, mid + 1, R, l, r, a);
+        chMin(u * 2 + 1, mid + 1, R, l, r, d);
     }
     pushup(u);
 }
@@ -122,7 +122,7 @@ void solve() {
         if (op == 0) {
             int a;
             std::cin >> a;
-            update(1, 1, n, l, r, a);
+            chMin(1, 1, n, l, r, a);
         } else if (op == 1) {
             std::cout << queryMax(1, 1, n, l, r) << '\n';
         } else {
