@@ -13,7 +13,7 @@ struct TreeNode {
 int A[N];
 
 // 由子节点合并当前节点信息
-void pushup(int u) {
+void pull(int u) {
     int lc = u * 2, rc = u * 2 + 1;
     tr[u].sum = tr[lc].sum + tr[rc].sum;
     if (tr[lc].mx1 == tr[rc].mx1) {
@@ -29,7 +29,7 @@ void pushup(int u) {
 }
 
 // 下传区间 chmin 标记：仅当子节点最大值更大时才更新
-void pushdown(int u) {
+void push(int u) {
     int lc = u * 2, rc = u * 2 + 1;
     if (tr[u].mx1 < tr[lc].mx1) {
         tr[lc].sum -= (tr[lc].mx1 - tr[u].mx1) * tr[lc].cnt;
@@ -48,7 +48,7 @@ void build(int u, int L, int R) {
     }
     int mid = (L + R) / 2;
     build(u * 2, L, mid), build(u * 2 + 1, mid + 1, R);
-    pushup(u);
+    pull(u);
 }
 
 // 区间 chmin：将 [l,r] 内的元素与 d 取较小值
@@ -65,7 +65,7 @@ void chMin(int u, int L, int R, int l, int r, LL d) {
         }
     }
 
-    pushdown(u);
+    push(u);
     int mid = (L + R) / 2;
     if (l <= mid) {
         chMin(u * 2, L, mid, l, r, d);
@@ -73,7 +73,7 @@ void chMin(int u, int L, int R, int l, int r, LL d) {
     if (r > mid) {
         chMin(u * 2 + 1, mid + 1, R, l, r, d);
     }
-    pushup(u);
+    pull(u);
 }
 
 LL queryMax(int u, int L, int R, int l, int r) {
@@ -81,7 +81,7 @@ LL queryMax(int u, int L, int R, int l, int r) {
         return tr[u].mx1;
     }
 
-    pushdown(u);
+    push(u);
     int mid = (L + R) / 2;
     LL res = -1;
     if (l <= mid) {
@@ -98,7 +98,7 @@ LL querySum(int u, int L, int R, int l, int r) {
         return tr[u].sum;
     }
 
-    pushdown(u);
+    push(u);
     int mid = (L + R) / 2;
     LL res = 0;
     if (l <= mid) {

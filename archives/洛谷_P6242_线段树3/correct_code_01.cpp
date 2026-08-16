@@ -16,7 +16,7 @@ struct TreeNode {
     LL mxda, mxdb;    // 最大值集合加法标记与其历史最大
 } tr[N * 4];
 
-void pushup(int u) {
+void pull(int u) {
     int lc = u * 2, rc = u * 2 + 1;
     tr[u].sum = tr[lc].sum + tr[rc].sum;
     tr[u].mx1 = std::max(tr[lc].mx1, tr[rc].mx1);
@@ -41,7 +41,7 @@ void build(int u, int L, int R) {
 
     int mid = (L + R) / 2;
     build(u * 2, L, mid), build(u * 2 + 1, mid + 1, R);
-    pushup(u);
+    pull(u);
 }
 
 // 打标记：先算历史最大（用旧的 da/mxda），再累加
@@ -58,7 +58,7 @@ void pushTag(int u, int L, int R, LL da, LL db, LL mxda, LL mxdb) {
     tr[u].mxda += mxda;
 }
 
-void pushdown(int u, int L, int R) {
+void push(int u, int L, int R) {
     int mid = (L + R) / 2;
     int lc = u * 2, rc = u * 2 + 1;
     // 父节点剔除自身标记后的底层最大值；子节点 mx1 已含自身标记，不能再减 mxda[child]
@@ -82,7 +82,7 @@ LL querySum(int u, int L, int R, int l, int r) {
         return tr[u].sum;
     }
 
-    pushdown(u, L, R);
+    push(u, L, R);
     int mid = (L + R) / 2;
     LL res = 0;
     if (l <= mid) {
@@ -99,7 +99,7 @@ LL queryMaxA(int u, int L, int R, int l, int r) {
         return tr[u].mx1;
     }
 
-    pushdown(u, L, R);
+    push(u, L, R);
     int mid = (L + R) / 2;
     LL res = -INF;
     if (l <= mid) {
@@ -116,7 +116,7 @@ LL queryMaxB(int u, int L, int R, int l, int r) {
         return tr[u].mxb;
     }
 
-    pushdown(u, L, R);
+    push(u, L, R);
     int mid = (L + R) / 2;
     LL res = -INF;
     if (l <= mid) {
@@ -144,7 +144,7 @@ void add(int u, int L, int R, int l, int r, LL d) {
         return;
     }
 
-    pushdown(u, L, R);
+    push(u, L, R);
     int mid = (L + R) / 2;
     if (l <= mid) {
         add(u * 2, L, mid, l, r, d);
@@ -152,7 +152,7 @@ void add(int u, int L, int R, int l, int r, LL d) {
     if (r > mid) {
         add(u * 2 + 1, mid + 1, R, l, r, d);
     }
-    pushup(u);
+    pull(u);
 }
 
 void chMin(int u, int L, int R, int l, int r, LL d) {
@@ -174,7 +174,7 @@ void chMin(int u, int L, int R, int l, int r, LL d) {
         return;
     }
 
-    pushdown(u, L, R);
+    push(u, L, R);
     int mid = (L + R) / 2;
     if (l <= mid) {
         chMin(u * 2, L, mid, l, r, d);
@@ -182,7 +182,7 @@ void chMin(int u, int L, int R, int l, int r, LL d) {
     if (r > mid) {
         chMin(u * 2 + 1, mid + 1, R, l, r, d);
     }
-    pushup(u);
+    pull(u);
 }
 
 int main() {

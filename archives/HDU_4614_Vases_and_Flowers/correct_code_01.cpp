@@ -9,11 +9,11 @@ struct TreeNode {
     bool tag;
 } tr[N * 4];
 
-void pushup(int u) {
+void pull(int u) {
     tr[u].v = tr[u * 2].v + tr[u * 2 + 1].v;
 }
 
-void pushdown(int u, int L, int R) {
+void push(int u, int L, int R) {
     if (tr[u].tag) {
         int mid = (L + R) / 2;
         int lc = u * 2, rc = u * 2 + 1;
@@ -42,7 +42,7 @@ void set(int u, int L, int R, int l, int r, int v) {
         return;
     }
 
-    pushdown(u, L, R);
+    push(u, L, R);
     int mid = (L + R) / 2;
     if (l <= mid) {
         set(u * 2, L, mid, l, r, v);
@@ -50,7 +50,7 @@ void set(int u, int L, int R, int l, int r, int v) {
     if (r > mid) {
         set(u * 2 + 1, mid + 1, R, l, r, v);
     }
-    pushup(u);
+    pull(u);
 }
 
 int query(int u, int L, int R, int l, int r) {
@@ -58,7 +58,7 @@ int query(int u, int L, int R, int l, int r) {
         return tr[u].v;
     }
 
-    pushdown(u, L, R);
+    push(u, L, R);
     int res = 0, mid = (L + R) / 2;
     if (l <= mid) {
         res += query(u * 2, L, mid, l, r);

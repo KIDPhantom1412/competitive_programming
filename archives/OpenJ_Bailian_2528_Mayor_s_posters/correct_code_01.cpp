@@ -12,7 +12,7 @@ struct TreeNode {
     int d; // 区间赋值标记：0 表示颜色不统一/无颜色
 } tr[N * 4];
 
-void pushdown(int u) {
+void push(int u) {
     if (tr[u].d) {
         tr[u * 2].d = tr[u * 2 + 1].d = tr[u].d;
         tr[u].d = 0;
@@ -34,7 +34,7 @@ void set(int u, int L, int R, int l, int r, int v) {
         return;
     }
 
-    pushdown(u);
+    push(u);
     int mid = (L + R) / 2;
     if (l <= mid) {
         set(u * 2, L, mid, l, r, v);
@@ -59,7 +59,7 @@ void sum(int u, int L, int R) {
         return;
     }
 
-    pushdown(u);
+    push(u);
     int mid = (L + R) / 2;
     sum(u * 2, L, mid), sum(u * 2 + 1, mid + 1, R);
 }

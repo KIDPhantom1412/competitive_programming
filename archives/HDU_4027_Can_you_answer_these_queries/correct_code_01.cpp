@@ -14,7 +14,7 @@ struct TreeNode {
     bool tag;  // 区间是否全为 1（已稳定，无需再更新）
 } tr[N * 4];
 
-void pushup(int u, int L, int R) {
+void pull(int u, int L, int R) {
     tr[u].v = tr[u * 2].v + tr[u * 2 + 1].v;
     // 隐含条件：所有 Ei >= 1，因此 sum == len 等价于区间全 1
     tr[u].tag = tr[u].v == R - L + 1;
@@ -28,7 +28,7 @@ void build(int u, int L, int R) {
 
     int mid = (L + R) / 2;
     build(u * 2, L, mid), build(u * 2 + 1, mid + 1, R);
-    pushup(u, L, R);
+    pull(u, L, R);
 }
 
 void update(int u, int L, int R, int l, int r) {
@@ -49,7 +49,7 @@ void update(int u, int L, int R, int l, int r) {
     if (r > mid) {
         update(u * 2 + 1, mid + 1, R, l, r);
     }
-    pushup(u, L, R);
+    pull(u, L, R);
 }
 
 LL query(int u, int L, int R, int l, int r) {

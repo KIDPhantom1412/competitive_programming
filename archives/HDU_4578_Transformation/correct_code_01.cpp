@@ -39,14 +39,14 @@ struct TreeNode {
     }
 } tr[N * 4];
 
-void pushup(int u) {
+void pull(int u) {
     int lc = u * 2, rc = u * 2 + 1;
     tr[u].v1 = (tr[lc].v1 + tr[rc].v1) % MOD;
     tr[u].v2 = (tr[lc].v2 + tr[rc].v2) % MOD;
     tr[u].v3 = (tr[lc].v3 + tr[rc].v3) % MOD;
 }
 
-void pushdown(int u) {
+void push(int u) {
     int lc = u * 2, rc = u * 2 + 1;
     if (tr[u].set) {                // 隐含条件：题目保证 c >= 1，set 不会为 0
         tr[lc].updateSet(tr[u].set);
@@ -80,7 +80,7 @@ void add(int u, int l, int r, int d) {
         tr[u].updateAdd(d);
         return;
     }
-    pushdown(u);
+    push(u);
     int mid = (tr[u].L + tr[u].R) / 2;
     if (l <= mid) {
         add(u * 2, l, r, d);
@@ -88,7 +88,7 @@ void add(int u, int l, int r, int d) {
     if (r > mid) {
         add(u * 2 + 1, l, r, d);
     }
-    pushup(u);
+    pull(u);
 }
 
 void mul(int u, int l, int r, int d) {
@@ -96,7 +96,7 @@ void mul(int u, int l, int r, int d) {
         tr[u].updateMul(d);
         return;
     }
-    pushdown(u);
+    push(u);
     int mid = (tr[u].L + tr[u].R) / 2;
     if (l <= mid) {
         mul(u * 2, l, r, d);
@@ -104,7 +104,7 @@ void mul(int u, int l, int r, int d) {
     if (r > mid) {
         mul(u * 2 + 1, l, r, d);
     }
-    pushup(u);
+    pull(u);
 }
 
 void set(int u, int l, int r, int d) {
@@ -112,7 +112,7 @@ void set(int u, int l, int r, int d) {
         tr[u].updateSet(d);
         return;
     }
-    pushdown(u);
+    push(u);
     int mid = (tr[u].L + tr[u].R) / 2;
     if (l <= mid) {
         set(u * 2, l, r, d);
@@ -120,7 +120,7 @@ void set(int u, int l, int r, int d) {
     if (r > mid) {
         set(u * 2 + 1, l, r, d);
     }
-    pushup(u);
+    pull(u);
 }
 
 int query(int u, int l, int r, int p) {
@@ -133,7 +133,7 @@ int query(int u, int l, int r, int p) {
             return tr[u].v3;
         }
     }
-    pushdown(u); // 查询部分覆盖的节点前必须下放懒标记
+    push(u); // 查询部分覆盖的节点前必须下放懒标记
     int res = 0, mid = (tr[u].L + tr[u].R) / 2;
     if (l <= mid) {
         res = (res + query(u * 2, l, r, p)) % MOD;
