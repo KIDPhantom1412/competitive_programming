@@ -11,6 +11,10 @@ fi
 CXX=${CXX:-g++}
 CXXFLAGS=${CXXFLAGS:--std=c++23 -O2 -Wall -Wextra}
 
+if [ -n "${ULIMIT_STACK:-}" ]; then
+    ulimit -s "$ULIMIT_STACK"
+fi
+
 INPUT=${1:-input.txt}
 OUTPUT=${2:-output.txt}
 
